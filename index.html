@@ -60,7 +60,7 @@
       font-size: 0.95rem;
     }
 
-    /* Action Buttons */
+    /* Actions */
     .share-container {
       display: flex;
       justify-content: center;
@@ -167,12 +167,47 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
     }
 
     .event-card:hover {
       transform: translateY(-2px);
       border-color: #475569;
+    }
+
+    /* Status Styles (Active / Today / Past) */
+    .event-card.past {
+      opacity: 0.45;
+      background: rgba(30, 41, 59, 0.6);
+    }
+
+    .event-card.past .title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .event-card.today {
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+
+    .status-tag {
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .status-past {
+      background: #334155;
+      color: #94a3b8;
+    }
+
+    .status-today {
+      background: #0284c7;
+      color: #ffffff;
     }
 
     .icon-box {
@@ -272,9 +307,9 @@
       <button class="filter-btn" onclick="filterEvents(event, 'cat-special')">💛 วันสำคัญ</button>
     </div>
 
-    <!-- Timeline Event Cards -->
+    <!-- Timeline Event Cards with End Dates -->
     <main class="timeline" id="eventList">
-      <article class="event-card cat-exam">
+      <article class="event-card cat-exam" data-start="2026-09-10" data-end="2026-09-10">
         <div class="icon-box">📝</div>
         <div class="details">
           <span class="date-badge">10 ก.ย. 69</span>
@@ -283,7 +318,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-exam">
+      <article class="event-card cat-exam" data-start="2026-09-14" data-end="2026-09-16">
         <div class="icon-box">✍️</div>
         <div class="details">
           <span class="date-badge">14 - 16 ก.ย. 69</span>
@@ -292,7 +327,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-exam">
+      <article class="event-card cat-exam" data-start="2026-09-24" data-end="2026-09-25">
         <div class="icon-box">🔄</div>
         <div class="details">
           <span class="date-badge">24 - 25 ก.ย. 69</span>
@@ -301,7 +336,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-exam">
+      <article class="event-card cat-exam" data-start="2026-09-29" data-end="2026-09-30">
         <div class="icon-box">🏁</div>
         <div class="details">
           <span class="date-badge">29 - 30 ก.ย. 69</span>
@@ -310,7 +345,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-exam">
+      <article class="event-card cat-exam" data-start="2026-10-02" data-end="2026-10-02">
         <div class="icon-box">📑</div>
         <div class="details">
           <span class="date-badge">2 ต.ค. 69</span>
@@ -319,7 +354,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-activity">
+      <article class="event-card cat-activity" data-start="2026-10-06" data-end="2026-10-07">
         <div class="icon-box">⛺</div>
         <div class="details">
           <span class="date-badge">6 - 7 ต.ค. 69</span>
@@ -328,7 +363,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-activity">
+      <article class="event-card cat-activity" data-start="2026-10-28" data-end="2026-10-30">
         <div class="icon-box">🏕️</div>
         <div class="details">
           <span class="date-badge">28 - 30 ต.ค. 69</span>
@@ -337,7 +372,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-term">
+      <article class="event-card cat-term" data-start="2026-11-02" data-end="2026-11-02">
         <div class="icon-box">🎒</div>
         <div class="details">
           <span class="date-badge">2 พ.ย. 69</span>
@@ -346,7 +381,7 @@
         </div>
       </article>
 
-      <article class="event-card cat-special">
+      <article class="event-card cat-special" data-start="2026-12-26" data-end="2026-12-26">
         <div class="icon-box">💛</div>
         <div class="details">
           <span class="date-badge">26 ธ.ค. 69</span>
@@ -358,6 +393,31 @@
   </div>
 
   <script>
+    function checkEventStatus() {
+      const now = new Date();
+      // ดึงปี เดือน วัน ในเวลาท้องถิ่นแบบ YYYY-MM-DD
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const todayStr = `${year}-${month}-${day}`;
+
+      document.querySelectorAll('.event-card').forEach(card => {
+        const startDate = card.getAttribute('data-start');
+        const endDate = card.getAttribute('data-end');
+        if (!endDate) return;
+
+        const badge = card.querySelector('.date-badge');
+
+        if (todayStr > endDate) {
+          card.classList.add('past');
+          badge.insertAdjacentHTML('beforeend', '<span class="status-tag status-past">✓ เสร็จสิ้น</span>');
+        } else if (todayStr >= startDate && todayStr <= endDate) {
+          card.classList.add('today');
+          badge.insertAdjacentHTML('beforeend', '<span class="status-tag status-today">📌 วันนี้</span>');
+        }
+      });
+    }
+
     function filterEvents(e, category) {
       const buttons = document.querySelectorAll('.filter-btn');
       buttons.forEach(btn => btn.classList.remove('active'));
@@ -406,6 +466,9 @@
         }, 2000);
       });
     }
+
+    // เรียกทำงานตรวจเช็กสถานะกิจกรรมอัตโนมัติทันที
+    checkEventStatus();
   </script>
 </body>
 </html>
