@@ -97,21 +97,35 @@
       color: var(--text);
     }
 
-    /* Summary Grid */
+    /* Interactive Summary Grid */
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .summary-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 14px;
+      padding: 14px 10px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .summary-card.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+      background: #243248;
     }
 
     .summary-card .number {
@@ -125,31 +139,29 @@
       color: var(--text-muted);
     }
 
-    /* Filter Bar */
-    .filter-bar {
+    /* Reset / Show All Button Bar */
+    .control-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-      justify-content: center;
+      justify-content: flex-end;
+      margin-bottom: 18px;
     }
 
-    .filter-btn {
-      background: var(--card-bg);
+    .btn-show-all {
+      background: transparent;
       border: 1px solid var(--border);
       color: var(--text-muted);
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--primary);
-      color: #0f172a;
-      font-weight: 600;
+    .btn-show-all:hover, .btn-show-all.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
       border-color: var(--primary);
+      font-weight: 500;
     }
 
     /* Timeline Cards */
@@ -278,33 +290,31 @@
       </button>
     </div>
 
-    <!-- Summary Stats -->
+    <!-- Clickable Summary Cards -->
     <section class="summary-grid">
-      <div class="summary-card">
+      <div class="summary-card" onclick="filterByCategory('cat-exam', this)">
         <div class="number" style="color: var(--exam);">5</div>
         <div class="label">การสอบ / ประเมิน</div>
       </div>
-      <div class="summary-card">
+      <div class="summary-card" onclick="filterByCategory('cat-activity', this)">
         <div class="number" style="color: var(--activity);">2</div>
         <div class="label">ค่ายลูกเสือ</div>
       </div>
-      <div class="summary-card">
+      <div class="summary-card" onclick="filterByCategory('cat-term', this)">
         <div class="number" style="color: var(--term);">1</div>
         <div class="label">เปิดภาคเรียนที่ 2</div>
       </div>
-      <div class="summary-card">
+      <div class="summary-card" onclick="filterByCategory('cat-special', this)">
         <div class="number" style="color: var(--special);">1</div>
         <div class="label">กิจกรรมพิเศษ</div>
       </div>
     </section>
 
-    <!-- Filters -->
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterEvents(event, 'all')">ทั้งหมด</button>
-      <button class="filter-btn" onclick="filterEvents(event, 'cat-exam')">📝 การสอบ</button>
-      <button class="filter-btn" onclick="filterEvents(event, 'cat-activity')">⛺ ค่ายกิจกรรม</button>
-      <button class="filter-btn" onclick="filterEvents(event, 'cat-term')">🎒 ภาคเรียน</button>
-      <button class="filter-btn" onclick="filterEvents(event, 'cat-special')">💛 วันสำคัญ</button>
+    <!-- Reset / Show All Button -->
+    <div class="control-bar">
+      <button class="btn-show-all active" id="btnShowAll" onclick="resetFilter()">
+        🔄 แสดงทั้งหมด (9 รายการ)
+      </button>
     </div>
 
     <!-- Timeline Event Cards -->
@@ -391,11 +401,11 @@
       </article>
     </main>
 
-    <!-- Footer ท้ายหน้าแบบ Direct Style -->
+    <!-- Footer ท้ายหน้า -->
     <footer style="text-align: center; margin-top: 36px; padding-top: 18px; border-top: 1px solid #334155;">
       <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #94a3b8; background: rgba(255, 255, 255, 0.05); border: 1px solid #334155; padding: 4px 14px; border-radius: 999px;">
         <span style="width: 7px; height: 7px; background-color: #10b981; border-radius: 50%; display: inline-block;"></span>
-        <span>Version 1.1 • อัปเดตล่าสุด 10 ก.ย. 2569</span>
+        <span>Version 1.2 • อัปเดตล่าสุด 10 ก.ย. 2569</span>
       </div>
     </footer>
   </div>
@@ -425,18 +435,30 @@
       });
     }
 
-    function filterEvents(e, category) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      e.currentTarget.classList.add('active');
+    function filterByCategory(category, cardElem) {
+      // ปรับสถานะ Active บนการ์ดสรุป
+      document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('btnShowAll').classList.remove('active');
+      cardElem.classList.add('active');
 
+      // กรองการ์ดกิจกรรม
       const cards = document.querySelectorAll('.event-card');
       cards.forEach(card => {
-        if (category === 'all' || card.classList.contains(category)) {
+        if (card.classList.contains(category)) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
         }
+      });
+    }
+
+    function resetFilter() {
+      document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('btnShowAll').classList.add('active');
+
+      const cards = document.querySelectorAll('.event-card');
+      cards.forEach(card => {
+        card.style.display = 'flex';
       });
     }
 
