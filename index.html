@@ -258,25 +258,6 @@
         margin-top: 4px;
       }
     }
-    /* Version Tag */
-    .version-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-top: 8px;
-    }
-    .version-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #10b981; /* จุดไฟเขียวบอกสถานะออนไลน์ */
-      border-radius: 50%;
-    }
   </style>
 </head>
 <body>
@@ -326,7 +307,7 @@
       <button class="filter-btn" onclick="filterEvents(event, 'cat-special')">💛 วันสำคัญ</button>
     </div>
 
-    <!-- Timeline Event Cards with End Dates -->
+    <!-- Timeline Event Cards -->
     <main class="timeline" id="eventList">
       <article class="event-card cat-exam" data-start="2026-09-10" data-end="2026-09-10">
         <div class="icon-box">📝</div>
@@ -409,10 +390,11 @@
         </div>
       </article>
     </main>
-    <!-- Footer ท้ายหน้า -->
-    <footer style="text-align: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);">
-      <div class="version-tag">
-        <span class="version-dot"></span>
+
+    <!-- Footer ท้ายหน้าแบบ Direct Style -->
+    <footer style="text-align: center; margin-top: 36px; padding-top: 18px; border-top: 1px solid #334155;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #94a3b8; background: rgba(255, 255, 255, 0.05); border: 1px solid #334155; padding: 4px 14px; border-radius: 999px;">
+        <span style="width: 7px; height: 7px; background-color: #10b981; border-radius: 50%; display: inline-block;"></span>
         <span>Version 1.1 • อัปเดตล่าสุด 10 ก.ย. 2569</span>
       </div>
     </footer>
@@ -421,7 +403,6 @@
   <script>
     function checkEventStatus() {
       const now = new Date();
-      // ดึงปี เดือน วัน ในเวลาท้องถิ่นแบบ YYYY-MM-DD
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, '0');
       const day = String(now.getDate()).padStart(2, '0');
@@ -493,7 +474,6 @@
       });
     }
 
-    // เรียกทำงานตรวจเช็กสถานะกิจกรรมอัตโนมัติทันที
     checkEventStatus();
   </script>
 </body>
