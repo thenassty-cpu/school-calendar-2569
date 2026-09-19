@@ -177,9 +177,16 @@
       border-radius: 14px;
       padding: 16px 18px;
       display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+    }
+
+    .event-card-header {
+      display: flex;
       align-items: center;
       gap: 16px;
-      transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+      width: 100%;
     }
 
     .event-card:hover {
@@ -253,8 +260,80 @@
     }
 
     .note {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Collapsible Camp Details Box */
+    .camp-expand-btn {
+      align-self: flex-start;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10b981;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .camp-expand-btn:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .camp-details-box {
+      display: none;
+      background: #131d2e;
+      border: 1px dashed rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .camp-details-box.open {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .camp-info-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-tag {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px 12px;
+      margin-top: 8px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .cat-exam .date-badge { background: rgba(245, 158, 11, 0.15); color: var(--exam); }
@@ -263,11 +342,14 @@
     .cat-special .date-badge { background: rgba(236, 72, 153, 0.15); color: var(--special); }
 
     @media (max-width: 600px) {
-      .event-card {
+      .event-card-header {
         align-items: flex-start;
       }
       .icon-box {
         margin-top: 4px;
+      }
+      .checklist-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -320,83 +402,126 @@
     <!-- Timeline Event Cards -->
     <main class="timeline" id="eventList">
       <article class="event-card cat-exam" data-start="2026-09-10" data-end="2026-09-10">
-        <div class="icon-box">📝</div>
-        <div class="details">
-          <span class="date-badge">10 ก.ย. 69</span>
-          <div class="title">สอบ Top Test วิชาภาษาไทยและสังคมศึกษาฯ</div>
-          <div class="note">การประเมินความรู้ระดับชั้น</div>
+        <div class="event-card-header">
+          <div class="icon-box">📝</div>
+          <div class="details">
+            <span class="date-badge">10 ก.ย. 69</span>
+            <div class="title">สอบ Top Test วิชาภาษาไทยและสังคมศึกษาฯ</div>
+            <div class="note">การประเมินความรู้ระดับชั้น</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-exam" data-start="2026-09-14" data-end="2026-09-16">
-        <div class="icon-box">✍️</div>
-        <div class="details">
-          <span class="date-badge">14 - 16 ก.ย. 69</span>
-          <div class="title">สอบครั้งที่ 2</div>
-          <div class="note">การสอบเก็บคะแนนกลางภาค/ตามหน่วย</div>
+        <div class="event-card-header">
+          <div class="icon-box">✍️</div>
+          <div class="details">
+            <span class="date-badge">14 - 16 ก.ย. 69</span>
+            <div class="title">สอบครั้งที่ 2</div>
+            <div class="note">การสอบเก็บคะแนนกลางภาค/ตามหน่วย</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-exam" data-start="2026-09-24" data-end="2026-09-25">
-        <div class="icon-box">🔄</div>
-        <div class="details">
-          <span class="date-badge">24 - 25 ก.ย. 69</span>
-          <div class="title">สอบซ่อมครั้งที่ 2</div>
-          <div class="note">สำหรับนักเรียนที่ต้องปรับปรุงคะแนน</div>
+        <div class="event-card-header">
+          <div class="icon-box">🔄</div>
+          <div class="details">
+            <span class="date-badge">24 - 25 ก.ย. 69</span>
+            <div class="title">สอบซ่อมครั้งที่ 2</div>
+            <div class="note">สำหรับนักเรียนที่ต้องปรับปรุงคะแนน</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-exam" data-start="2026-09-29" data-end="2026-09-30">
-        <div class="icon-box">🏁</div>
-        <div class="details">
-          <span class="date-badge">29 - 30 ก.ย. 69</span>
-          <div class="title">สอบปลายภาคเรียนที่ 1/2569</div>
-          <div class="note">ประเมินผลการเรียนรู้ปลายภาค</div>
+        <div class="event-card-header">
+          <div class="icon-box">🏁</div>
+          <div class="details">
+            <span class="date-badge">29 - 30 ก.ย. 69</span>
+            <div class="title">สอบปลายภาคเรียนที่ 1/2569</div>
+            <div class="note">ประเมินผลการเรียนรู้ปลายภาค</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-exam" data-start="2026-10-02" data-end="2026-10-02">
-        <div class="icon-box">📑</div>
-        <div class="details">
-          <span class="date-badge">2 ต.ค. 69</span>
-          <div class="title">สอบซ่อมปลายภาคเรียนที่ 1/2569</div>
-          <div class="note">สรุปผลการเรียนและแก้คะแนนตกค้าง</div>
+        <div class="event-card-header">
+          <div class="icon-box">📑</div>
+          <div class="details">
+            <span class="date-badge">2 ต.ค. 69</span>
+            <div class="title">สอบซ่อมปลายภาคเรียนที่ 1/2569</div>
+            <div class="note">สรุปผลการเรียนและแก้คะแนนตกค้าง</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-activity" data-start="2026-10-06" data-end="2026-10-07">
-        <div class="icon-box">⛺</div>
-        <div class="details">
-          <span class="date-badge">6 - 7 ต.ค. 69</span>
-          <div class="title">เข้าค่ายลูกเสือ-เนตรนารี (ป.1 - ป.3)</div>
-          <div class="note">✨ สิ้นสุดกิจกรรมแล้วนักเรียนหยุดปิดภาคเรียน</div>
+        <div class="event-card-header">
+          <div class="icon-box">⛺</div>
+          <div class="details">
+            <span class="date-badge">6 - 7 ต.ค. 69</span>
+            <div class="title">เข้าค่ายลูกเสือ-เนตรนารี (ป.1 - ป.3)</div>
+            <div class="note">✨ สิ้นสุดกิจกรรมแล้วนักเรียนหยุดปิดภาคเรียน</div>
+          </div>
         </div>
       </article>
 
+      <!-- ค่าย ป.4 - ป.6 พร้อมรายละเอียดและเช็กลิสต์ -->
       <article class="event-card cat-activity" data-start="2026-10-28" data-end="2026-10-30">
-        <div class="icon-box">🏕️</div>
-        <div class="details">
-          <span class="date-badge">28 - 30 ต.ค. 69</span>
-          <div class="title">เข้าค่ายลูกเสือ-เนตรนารี (ป.4 - ป.6)</div>
-          <div class="note">จัดขึ้นช่วงปิดภาคเรียน</div>
+        <div class="event-card-header">
+          <div class="icon-box">🏕️</div>
+          <div class="details">
+            <span class="date-badge">28 - 30 ต.ค. 69</span>
+            <div class="title">เข้าค่ายลูกเสือ - เนตรนารีสามัญ (ป.4 - ป.6)</div>
+            <div class="note">ระยะเวลา 3 วัน 2 คืน (ค่ายชั่วคราวโรงเรียนเปี่ยมสุวรรณวิทยา)</div>
+            <button class="camp-expand-btn" onclick="toggleCampDetails(this)">
+              📋 ดูรายละเอียด & เช็กลิสต์ของที่ต้องเตรียม
+            </button>
+          </div>
+        </div>
+
+        <div class="camp-details-box" id="campBox">
+          <div class="camp-info-meta">
+            <span class="meta-tag">💰 <strong>ค่าใช้จ่าย:</strong> 350 บาท</span>
+            <span class="meta-tag">👔 <strong>การแต่งกายวันไป:</strong> แต่งชุดลูกเสือ-เนตรนารีสามัญ ให้เรียบร้อย</span>
+          </div>
+          <strong style="color: #38bdf8;">🎒 รายการสิ่งของที่ต้องนำมาเข้าค่าย (11 รายการ):</strong>
+          <div class="checklist-grid">
+            <div class="checklist-item">▫️ 1. ชุดลำลอง 3 ชุด</div>
+            <div class="checklist-item">▫️ 2. ชุดพละ 1 ชุด (สีเหลือง)</div>
+            <div class="checklist-item">▫️ 3. ผ้าถุง / ผ้าเช็ดตัว</div>
+            <div class="checklist-item">▫️ 4. ชุดชั้นใน 3 - 4 ตัว</div>
+            <div class="checklist-item">▫️ 5. แปรงสีฟัน ยาสีฟัน ขันน้ำ สบู่ แป้ง 1 ชุด</div>
+            <div class="checklist-item">▫️ 6. รองเท้าแตะสำหรับอาบน้ำ 1 คู่</div>
+            <div class="checklist-item">▫️ 7. รองเท้าพละสำหรับเนตรนารี</div>
+            <div class="checklist-item">▫️ 8. ไม้แขวนเสื้อ 2 - 3 อัน</div>
+            <div class="checklist-item">▫️ 9. เชือกสำหรับเรียนเงื่อน 1 เส้น</div>
+            <div class="checklist-item">▫️ 10. ดินสอ ปากกา ยางลบ</div>
+            <div class="checklist-item" style="color: #f59e0b;">▫️ 11. ยารักษาโรค (สำหรับผู้มีโรคประจำตัว)</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-term" data-start="2026-11-02" data-end="2026-11-02">
-        <div class="icon-box">🎒</div>
-        <div class="details">
-          <span class="date-badge">2 พ.ย. 69</span>
-          <div class="title">เปิดเรียนภาคเรียนที่ 2/2569</div>
-          <div class="note">เริ่มต้นการเรียนการสอนเทอมใหม่</div>
+        <div class="event-card-header">
+          <div class="icon-box">🎒</div>
+          <div class="details">
+            <span class="date-badge">2 พ.ย. 69</span>
+            <div class="title">เปิดเรียนภาคเรียนที่ 2/2569</div>
+            <div class="note">เริ่มต้นการเรียนการสอนเทอมใหม่</div>
+          </div>
         </div>
       </article>
 
       <article class="event-card cat-special" data-start="2026-12-26" data-end="2026-12-26">
-        <div class="icon-box">💛</div>
-        <div class="details">
-          <span class="date-badge">26 ธ.ค. 69</span>
-          <div class="title">จัดงานวันพ่อแห่งชาติ</div>
-          <div class="note">กิจกรรมพิเศษและความสัมพันธ์ในครอบครัว</div>
+        <div class="event-card-header">
+          <div class="icon-box">💛</div>
+          <div class="details">
+            <span class="date-badge">26 ธ.ค. 69</span>
+            <div class="title">จัดงานวันพ่อแห่งชาติ</div>
+            <div class="note">กิจกรรมพิเศษและความสัมพันธ์ในครอบครัว</div>
+          </div>
         </div>
       </article>
     </main>
@@ -405,7 +530,7 @@
     <footer style="text-align: center; margin-top: 36px; padding-top: 18px; border-top: 1px solid #334155;">
       <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #94a3b8; background: rgba(255, 255, 255, 0.05); border: 1px solid #334155; padding: 4px 14px; border-radius: 999px;">
         <span style="width: 7px; height: 7px; background-color: #10b981; border-radius: 50%; display: inline-block;"></span>
-        <span>Version 1.2 • อัปเดตล่าสุด 10 ก.ย. 2569</span>
+        <span>Version 1.3 • อัปเดตล่าสุด 19 ก.ย. 2569</span>
       </div>
     </footer>
   </div>
@@ -435,13 +560,21 @@
       });
     }
 
+    function toggleCampDetails(btn) {
+      const box = document.getElementById('campBox');
+      box.classList.toggle('open');
+      if (box.classList.contains('open')) {
+        btn.innerHTML = '🔼 ปิดรายละเอียด';
+      } else {
+        btn.innerHTML = '📋 ดูรายละเอียด & เช็กลิสต์ของที่ต้องเตรียม';
+      }
+    }
+
     function filterByCategory(category, cardElem) {
-      // ปรับสถานะ Active บนการ์ดสรุป
       document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
       document.getElementById('btnShowAll').classList.remove('active');
       cardElem.classList.add('active');
 
-      // กรองการ์ดกิจกรรม
       const cards = document.querySelectorAll('.event-card');
       cards.forEach(card => {
         if (card.classList.contains(category)) {
