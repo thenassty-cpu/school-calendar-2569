@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome สำหรับไอคอนคมชัด -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -196,7 +196,7 @@
       border-color: #475569;
     }
 
-    /* Status Styles (Active / Today / Past) */
+    /* Status Styles */
     .event-card.past {
       opacity: 0.45;
       background: rgba(30, 41, 59, 0.6);
@@ -267,7 +267,7 @@
       line-height: 1.4;
     }
 
-    /* Collapsible Camp Details Box */
+    /* Camp Details */
     .camp-expand-btn {
       align-self: flex-start;
       background: rgba(16, 185, 129, 0.1);
@@ -322,15 +322,15 @@
 
     .checklist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 6px 12px;
-      margin-top: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px 12px;
+      margin-top: 10px;
     }
 
     .checklist-item {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     @keyframes fadeIn {
@@ -377,7 +377,7 @@
     <!-- Clickable Summary Cards -->
     <section class="summary-grid">
       <div class="summary-card" onclick="filterByCategory('cat-exam', this)">
-        <div class="number" style="color: var(--exam);">5</div>
+        <div class="number" style="color: var(--exam);">6</div>
         <div class="label">การสอบ / ประเมิน</div>
       </div>
       <div class="summary-card" onclick="filterByCategory('cat-activity', this)">
@@ -397,7 +397,7 @@
     <!-- Reset / Show All Button -->
     <div class="control-bar">
       <button class="btn-show-all active" id="btnShowAll" onclick="resetFilter()">
-        🔄 แสดงทั้งหมด (9 รายการ)
+        🔄 แสดงทั้งหมด (10 รายการ)
       </button>
     </div>
 
@@ -421,6 +421,18 @@
             <span class="date-badge">14 - 16 ก.ย. 69</span>
             <div class="title">สอบครั้งที่ 2</div>
             <div class="note">การสอบเก็บคะแนนกลางภาค/ตามหน่วย</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- รายการสอบว่ายน้ำ ป.6 ที่เพิ่มเข้ามาใหม่ -->
+      <article class="event-card cat-exam" data-start="2026-09-24" data-end="2026-09-24">
+        <div class="event-card-header">
+          <div class="icon-box">🏊</div>
+          <div class="details">
+            <span class="date-badge">24 ก.ย. 69</span>
+            <div class="title">สอบว่ายน้ำ (นักเรียนชั้น ป.6)</div>
+            <div class="note">⚠️ ผู้ปกครองโปรดเตรียมชุดว่ายน้ำให้นักเรียนนำมาสอบด้วยครับ</div>
           </div>
         </div>
       </article>
@@ -469,7 +481,7 @@
         </div>
       </article>
 
-      <!-- ค่าย ป.4 - ป.6 พร้อมรายละเอียดและเช็กลิสต์ -->
+      <!-- ค่าย ป.4 - ป.6 พร้อม Font Awesome Icons -->
       <article class="event-card cat-activity" data-start="2026-10-28" data-end="2026-10-30">
         <div class="event-card-header">
           <div class="icon-box">🏕️</div>
@@ -490,17 +502,17 @@
           </div>
           <strong style="color: #38bdf8;">🎒 รายการสิ่งของที่ต้องนำมาเข้าค่าย (11 รายการ):</strong>
           <div class="checklist-grid">
-            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #38bdf8;"></i> ชุดลำลอง 3 ชุด</div>
-            <div class="checklist-item"><i class="fa-solid fa-vest" style="color: #eab308;"></i> ชุดพละ 1 ชุด (สีเหลือง)</div>
-            <div class="checklist-item"><i class="fa-solid fa-rug" style="color: #cbd5e1;"></i> ผ้าถุง / ผ้าเช็ดตัว</div>
-            <div class="checklist-item"><i class="fa-solid fa-layer-group" style="color: #a855f7;"></i> ชุดชั้นใน 3 - 4 ตัว</div>
-            <div class="checklist-item"><i class="fa-solid fa-pump-soap" style="color: #06b6d4;"></i> แปรงสีฟัน ยาสีฟัน ขันน้ำ สบู่ แป้ง (1 ชุด)</div>
-            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #f97316;"></i> รองเท้าแตะสำหรับอาบน้ำ 1 คู่</div>
-            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #22c55e;"></i> รองเท้าพละ (สำหรับเนตรนารี)</div>
-            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #94a3b8;"></i> ไม้แขวนเสื้อ 2 - 3 อัน</div>
-            <div class="checklist-item"><i class="fa-solid fa-link" style="color: #eab308;"></i> เชือกสำหรับเรียนเงื่อน 1 เส้น</div>
-            <div class="checklist-item"><i class="fa-solid fa-pen-nib" style="color: #ec4899;"></i> ดินสอ ปากกา ยางลบ</div>
-            <div class="checklist-item" style="color: #f59e0b;"><i class="fa-solid fa-pills" style="color: #ef4444;"></i> ยารักษาโรค (สำหรับผู้มีโรคประจำตัว)</div>
+            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #38bdf8; width: 18px;"></i> ชุดลำลอง 3 ชุด</div>
+            <div class="checklist-item"><i class="fa-solid fa-vest" style="color: #eab308; width: 18px;"></i> ชุดพละ 1 ชุด (สีเหลือง)</div>
+            <div class="checklist-item"><i class="fa-solid fa-rug" style="color: #cbd5e1; width: 18px;"></i> ผ้าถุง / ผ้าเช็ดตัว</div>
+            <div class="checklist-item"><i class="fa-solid fa-layer-group" style="color: #a855f7; width: 18px;"></i> ชุดชั้นใน 3 - 4 ตัว</div>
+            <div class="checklist-item"><i class="fa-solid fa-pump-soap" style="color: #06b6d4; width: 18px;"></i> แปรงสีฟัน ยาสีฟัน ขันน้ำ สบู่ แป้ง 1 ชุด</div>
+            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #f97316; width: 18px;"></i> รองเท้าแตะสำหรับอาบน้ำ 1 คู่</div>
+            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #22c55e; width: 18px;"></i> รองเท้าพละ (สำหรับเนตรนารี)</div>
+            <div class="checklist-item"><i class="fa-solid fa-hanger" style="color: #94a3b8; width: 18px;"></i> ไม้แขวนเสื้อ 2 - 3 อัน</div>
+            <div class="checklist-item"><i class="fa-solid fa-link" style="color: #eab308; width: 18px;"></i> เชือกสำหรับเรียนเงื่อน 1 เส้น</div>
+            <div class="checklist-item"><i class="fa-solid fa-pen-nib" style="color: #ec4899; width: 18px;"></i> ดินสอ ปากกา ยางลบ</div>
+            <div class="checklist-item" style="color: #f59e0b;"><i class="fa-solid fa-pills" style="color: #ef4444; width: 18px;"></i> ยารักษาโรค (สำหรับผู้มีโรคประจำตัว)</div>
           </div>
         </div>
       </article>
@@ -532,7 +544,7 @@
     <footer style="text-align: center; margin-top: 36px; padding-top: 18px; border-top: 1px solid #334155;">
       <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: #94a3b8; background: rgba(255, 255, 255, 0.05); border: 1px solid #334155; padding: 4px 14px; border-radius: 999px;">
         <span style="width: 7px; height: 7px; background-color: #10b981; border-radius: 50%; display: inline-block;"></span>
-        <span>Version 1.3 • อัปเดตล่าสุด 19 ก.ย. 2569</span>
+        <span>Version 1.4 • อัปเดตล่าสุด 23 ก.ย. 2569</span>
       </div>
     </footer>
   </div>
