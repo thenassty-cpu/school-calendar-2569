@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome สำหรับไอคอนคมชัด -->
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -196,7 +196,7 @@
       border-color: #475569;
     }
 
-    /* Status Styles */
+    /* Status Styles (Active / Today / Past) */
     .event-card.past {
       opacity: 0.45;
       background: rgba(30, 41, 59, 0.6);
@@ -267,7 +267,7 @@
       line-height: 1.4;
     }
 
-    /* Camp Details */
+    /* Collapsible Camp Details Box */
     .camp-expand-btn {
       align-self: flex-start;
       background: rgba(16, 185, 129, 0.1);
@@ -322,15 +322,15 @@
 
     .checklist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 8px 12px;
-      margin-top: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px 12px;
+      margin-top: 8px;
     }
 
     .checklist-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     @keyframes fadeIn {
@@ -425,14 +425,13 @@
         </div>
       </article>
 
-      <!-- รายการสอบว่ายน้ำ ป.6 ที่เพิ่มเข้ามาใหม่ -->
       <article class="event-card cat-exam" data-start="2026-09-24" data-end="2026-09-24">
         <div class="event-card-header">
-          <div class="icon-box">🏊</div>
+          <div class="icon-box">🏊‍♀️</div>
           <div class="details">
             <span class="date-badge">24 ก.ย. 69</span>
-            <div class="title">สอบว่ายน้ำ (นักเรียนชั้น ป.6)</div>
-            <div class="note">⚠️ ผู้ปกครองโปรดเตรียมชุดว่ายน้ำให้นักเรียนนำมาสอบด้วยครับ</div>
+            <div class="title">สอบว่ายน้ำ (ป.6/3)</div>
+            <div class="note">ให้นักเรียนเตรียมชุดว่ายน้ำ แว่นตา ผ้าเช็ดตัว และถุงพลาสติกใส่ชุดเปียกมาด้วย</div>
           </div>
         </div>
       </article>
@@ -481,7 +480,7 @@
         </div>
       </article>
 
-      <!-- ค่าย ป.4 - ป.6 พร้อม Font Awesome Icons -->
+      <!-- ค่าย ป.4 - ป.6 พร้อมรายละเอียดและเช็กลิสต์ -->
       <article class="event-card cat-activity" data-start="2026-10-28" data-end="2026-10-30">
         <div class="event-card-header">
           <div class="icon-box">🏕️</div>
@@ -502,17 +501,17 @@
           </div>
           <strong style="color: #38bdf8;">🎒 รายการสิ่งของที่ต้องนำมาเข้าค่าย (11 รายการ):</strong>
           <div class="checklist-grid">
-            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #38bdf8; width: 18px;"></i> ชุดลำลอง 3 ชุด</div>
-            <div class="checklist-item"><i class="fa-solid fa-vest" style="color: #eab308; width: 18px;"></i> ชุดพละ 1 ชุด (สีเหลือง)</div>
-            <div class="checklist-item"><i class="fa-solid fa-rug" style="color: #cbd5e1; width: 18px;"></i> ผ้าถุง / ผ้าเช็ดตัว</div>
-            <div class="checklist-item"><i class="fa-solid fa-layer-group" style="color: #a855f7; width: 18px;"></i> ชุดชั้นใน 3 - 4 ตัว</div>
-            <div class="checklist-item"><i class="fa-solid fa-pump-soap" style="color: #06b6d4; width: 18px;"></i> แปรงสีฟัน ยาสีฟัน ขันน้ำ สบู่ แป้ง 1 ชุด</div>
-            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #f97316; width: 18px;"></i> รองเท้าแตะสำหรับอาบน้ำ 1 คู่</div>
-            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #22c55e; width: 18px;"></i> รองเท้าพละ (สำหรับเนตรนารี)</div>
-            <div class="checklist-item"><i class="fa-solid fa-hanger" style="color: #94a3b8; width: 18px;"></i> ไม้แขวนเสื้อ 2 - 3 อัน</div>
-            <div class="checklist-item"><i class="fa-solid fa-link" style="color: #eab308; width: 18px;"></i> เชือกสำหรับเรียนเงื่อน 1 เส้น</div>
-            <div class="checklist-item"><i class="fa-solid fa-pen-nib" style="color: #ec4899; width: 18px;"></i> ดินสอ ปากกา ยางลบ</div>
-            <div class="checklist-item" style="color: #f59e0b;"><i class="fa-solid fa-pills" style="color: #ef4444; width: 18px;"></i> ยารักษาโรค (สำหรับผู้มีโรคประจำตัว)</div>
+            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #38bdf8;"></i> ชุดลำลอง 3 ชุด</div>
+            <div class="checklist-item"><i class="fa-solid fa-vest" style="color: #eab308;"></i> ชุดพละ 1 ชุด (สีเหลือง)</div>
+            <div class="checklist-item"><i class="fa-solid fa-rug" style="color: #cbd5e1;"></i> ผ้าถุง / ผ้าเช็ดตัว</div>
+            <div class="checklist-item"><i class="fa-solid fa-layer-group" style="color: #a855f7;"></i> ชุดชั้นใน 3 - 4 ตัว</div>
+            <div class="checklist-item"><i class="fa-solid fa-pump-soap" style="color: #06b6d4;"></i> แปรงสีฟัน ยาสีฟัน ขันน้ำ สบู่ แป้ง (1 ชุด)</div>
+            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #f97316;"></i> รองเท้าแตะสำหรับอาบน้ำ 1 คู่</div>
+            <div class="checklist-item"><i class="fa-solid fa-shoe-prints" style="color: #22c55e;"></i> รองเท้าพละ (สำหรับเนตรนารี)</div>
+            <div class="checklist-item"><i class="fa-solid fa-shirt" style="color: #94a3b8;"></i> ไม้แขวนเสื้อ 2 - 3 อัน</div>
+            <div class="checklist-item"><i class="fa-solid fa-link" style="color: #eab308;"></i> เชือกสำหรับเรียนเงื่อน 1 เส้น</div>
+            <div class="checklist-item"><i class="fa-solid fa-pen-nib" style="color: #ec4899;"></i> ดินสอ ปากกา ยางลบ</div>
+            <div class="checklist-item" style="color: #f59e0b;"><i class="fa-solid fa-pills" style="color: #ef4444;"></i> ยารักษาโรค (สำหรับผู้มีโรคประจำตัว)</div>
           </div>
         </div>
       </article>
@@ -555,7 +554,7 @@
       const year = now.getFullYear();
       const month = String(now.getMonth() + 1).padStart(2, '0');
       const day = String(now.getDate()).padStart(2, '0');
-      const todayStr = `${year}-${month}-${day}`;
+      const todayStr = ${year}--;
 
       document.querySelectorAll('.event-card').forEach(card => {
         const startDate = card.getAttribute('data-start');
@@ -611,11 +610,11 @@
 
     function shareToLine() {
       const pageUrl = window.location.href;
-      const message = `📅 เช็กกำหนดการสอบ & ปฏิทินกิจกรรมโรงเรียน 2569:\n${pageUrl}`;
+      const message = 📅 เช็กกำหนดการสอบ & ปฏิทินกิจกรรมโรงเรียน 2569:\n;
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
       if (isMobile) {
-        window.location.href = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+        window.location.href = https://line.me/R/msg/text/?;
       } else {
         navigator.clipboard.writeText(message).then(() => {
           const lineBtn = document.querySelector('.btn-line');
